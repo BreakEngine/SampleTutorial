@@ -14,14 +14,28 @@ Game::~Game(void)
 
 void Game::init() 
 {
+	Services::getEngine()->setType(Time::LIMITED);
 
 	sp = new SpriteBatch();
 
 	spaceship_pos = Rect(100,200,100,100);
+
+
+
+	//
+	renderer = new FTRenderer();
+	font = ResourceLoader<FontFace>::load("res/fonts/PLANK___.TTF");
+	txt = new Text(renderer,font,"Score");
+	txt->size = 80;
+	txt->position = glm::vec2(0,0);
+	txt->color = Color(255,255,0,255);
+
 }
 
 void Game::loadResources() 
 {
+
+
 	  img = ResourceLoader<Image>::load("res/tex/space.jpg");
 	  bg =  std::make_shared<Texture2D>(img);
 
@@ -37,6 +51,7 @@ void Game::input()
 	if(Mouse::getButton(Mouse::Left_Button) == Mouse::State_Down)
 	{
 		printf("left button pressed \n");
+		
 	}
 
 	glm::vec2 mousepos = Mouse::getPosition();
@@ -68,8 +83,6 @@ void Game::update(TimeStep time)
 		spaceship_pos.y += 300 * time.delta;
 	}
 
-
-
 }
 
 void Game::render() 
@@ -77,6 +90,8 @@ void Game::render()
 
 	sp->begin();
 
+
+	txt->draw(sp);
 
 
 	sp->draw(spaceship.get(),spaceship_pos,Rect(0,0,170,102),0,glm::vec2(0,0),false, Color(255,255,255,255));

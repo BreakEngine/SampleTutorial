@@ -24,6 +24,12 @@ public:
 
 	Rect spaceship_pos;
 
+	//
+	FTRenderer *renderer;
+	FontFacePtr font;
+	Text* txt;
+
+
 
 	void init() override;
 

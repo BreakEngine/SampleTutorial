@@ -15,6 +15,8 @@ namespace Break {
 			u32 m_SampleSize;
 			bool m_loop;
 			bool m_playing, m_pausing;
+			bool once;
+
 
 		public:
 			RTTI(SoundEffect);
